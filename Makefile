@@ -122,6 +122,11 @@ wipe:
 		$(MAKE) clean; \
 		$(CD) ..; \
 	done );
+	$(CD) $(PYdir); \
+	$(MAKE) wipe; \
+	$(MAKE) clean; \
+	$(CD) ..; \
+	$(CD) ..;
 	@$(RM) $(RMFLAGS) $(WIPE_LIBS) *.o *~ core 
 	@$(CD) $(FE)/../EXAMPLES;  $(MAKE) wipe;
 

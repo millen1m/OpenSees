@@ -26,7 +26,7 @@ tcl: $(TclOBJS)
 	 -o tclInterpreter
 
 #PYTHON_LIBRARY = -framework Python
-PYTHON_LIBRARY =
+#PYTHON_LIBRARY =
 
 python:  $(PythonOBJS)
 	$(LINKER) $(LINKFLAGS) $(PythonOBJS) \
@@ -38,7 +38,7 @@ python:  $(PythonOBJS)
 
 OBJSm = OpenSeesCommandsPython.o OpenSeesUniaxialMaterialCommands.o PythonModelBuilder.o PythonAnalysisBuilder.o
 
-LINKFLAGS = -Wl,-rpath,\$$ORIGIN/lib
+#LINKFLAGS = -Wl,-rpath,\$$ORIGIN/lib
 
 pythonmodule: $(PythonModuleOBJS)
 	$(RM) $(RMFLAGS) opensees.so;
@@ -52,7 +52,7 @@ pythonmodule: $(PythonModuleOBJS)
 	$(CD) $(FE)/interpreter;
 	$(LINKER) $(LINKFLAGS) -shared $(PythonModuleOBJS) \
 	$(FE_LIBRARY) $(MACHINE_LINKLIBS) $(PYTHON_LIBRARY) \
-	$(MACHINE_NUMERICAL_LIBS) $(MACHINE_SPECIFIC_LIBS) $(PARALLEL_LIB) \
+	$(MACHINE_NUMERICAL_LIBS) $(MACHINE_SPECIFIC_LIBS)  \
 	$(INTERPRETER_LIBS_MPI_PARAMETERS) \
 	 -o opensees.so
 
