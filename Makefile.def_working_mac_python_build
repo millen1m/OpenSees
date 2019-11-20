@@ -13,6 +13,8 @@
 #
 #  Modified by Seokho Jeong for Mac OS X 10.11 El Capitan with
 #  Accelerate framework and Homebrew
+#  Modified by Maxim Millen 21-11-19 for Mac OS X 10.14.6 Mojave with
+#  Accelerate framework and Homebrew
 #
 ############################################################################
 # Prerequisites
