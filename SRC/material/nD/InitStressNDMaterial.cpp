@@ -43,7 +43,7 @@
 OPS_Export void *
 OPS_InitStressNDMaterial(void)
 {
-  // Pointer to a uniaxial material that will be returned
+  // Pointer to a nd material that will be returned
   NDMaterial *theMaterial = 0;
   NDMaterial *theOtherMaterial = 0;
 
@@ -102,7 +102,7 @@ OPS_InitStressNDMaterial(void)
   }
 
   if (theMaterial == 0) {
-    opserr << "WARNING could not create uniaxialMaterial of type InitStressNDMaterial\n";
+    opserr << "WARNING could not create NDMaterial of type InitStressNDMaterial\n";
     return 0;
   }
 

@@ -1053,8 +1053,8 @@ namespace {
 	functionMap.insert(std::make_pair("Aggregator", &OPS_SectionAggregator));
 	functionMap.insert(std::make_pair("AddDeformation", &OPS_SectionAggregator));
 	functionMap.insert(std::make_pair("ElasticPlateSection", &OPS_ElasticPlateSection));
-	functionMap.insert(std::make_pair("ElasticMembranePlateSection", &OPS_ElasticMembranePlateSection));
-	functionMap.insert(std::make_pair("PlateFiber", &OPS_MembranePlateFiberSection));
+//	functionMap.insert(std::make_pair("ElasticMembranePlateSection", &OPS_ElasticMembranePlateSection));  // remove duplicate
+//	functionMap.insert(std::make_pair("PlateFiber", &OPS_MembranePlateFiberSection));  // remove duplicate
 	functionMap.insert(std::make_pair("LayeredShell", &OPS_LayeredShellFiberSection));
 	functionMap.insert(std::make_pair("Bidirectional", &OPS_Bidirectional));
 	functionMap.insert(std::make_pair("Isolator2spring", &OPS_Isolator2spring));
