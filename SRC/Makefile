@@ -127,6 +127,7 @@ all:
 
 endif
 
+
 TCL_COMMAND_LIBS = $(FE)/domain/pattern/TclPatternCommand.o \
 	$(FE)/domain/pattern/TclSeriesCommand.o \
 	$(FE)/domain/pattern/TclSeriesIntegratorCommand.o \
@@ -224,6 +225,7 @@ REMO_LIBS = $(FE)/element/nonlinearBeamColumn/matrixutil/MatrixUtil.o \
 	$(FE)/element/forceBeamColumn/CompositeSimpsonBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/LegendreBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/RadauBeamIntegration.o \
+	$(FE)/element/forceBeamColumn/SimpsonBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/NewtonCotesBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/HingeMidpointBeamIntegration.o \
 	$(FE)/element/forceBeamColumn/HingeEndpointBeamIntegration.o \
@@ -270,6 +272,7 @@ GGD_LIBS = $(FE)/element/joint/MP_Joint2D.o \
 	$(FE)/element/joint/MP_Joint3D.o \
 	$(FE)/element/joint/Joint2D.o \
 	$(FE)/element/joint/Joint3D.o \
+	$(FE)/element/joint/LehighJoint2d.o \
 	$(FE)/element/joint/BeamColumnJoint2d.o \
 	$(FE)/element/joint/BeamColumnJoint3d.o \
 	$(FE)/element/joint/ElasticTubularJoint.o \
@@ -517,6 +520,12 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/elasticBeamColumn/ElasticTimoshenkoBeam2d.o \
 	$(FE)/element/elasticBeamColumn/ElasticTimoshenkoBeam3d.o \
 	$(FE)/element/elasticBeamColumn/WheelRail.o \
+	$(FE)/element/elasticBeamColumn/WheelRail.o \
+	$(FE)/element/elasticBeamColumn/WheelRail.o \
+	$(FE)/element/gradientInelasticBeamColumn/GradientInelasticBeamColumn2d.o \
+	$(FE)/element/gradientInelasticBeamColumn/GradientInelasticBeamColumn3d.o \
+	$(FE)/element/mixedBeamColumn/MixedBeamColumn2d.o \
+	$(FE)/element/mixedBeamColumn/MixedBeamColumn3d.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuad.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuad3d.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuadWithSensitivity.o \
@@ -605,6 +614,7 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/PFEMElement/TriGaussPoints.o \
 	$(FE)/element/PFEMElement/HigherOrder.o \
 	$(FE)/element/PFEMElement/Mesh.o \
+	$(FE)/element/PFEMElement/PFEMContact2D.o \
 	$(FE)/element/UWelements/SSPquad.o \
 	$(FE)/element/UWelements/SSPquadUP.o \
 	$(FE)/element/UWelements/SSPbrick.o \
@@ -633,6 +643,15 @@ ifdef DAMAGE2P_FLAG
 
 else
 	DAMAGE_2P =
+endif
+
+
+ifdef FILIP_FLAG
+	FILIP = $(FE)/element/filip/BeamColumn2DwLHNMYS.o \
+	$(FE)/element/filip/BeamColumn3DwLHNMYS.o \
+	$(FE)/element/filip/GPYS.o
+else
+	FILIP = 
 endif
 
 
@@ -750,8 +769,8 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/pyUCLA.o \
 	$(FE)/material/uniaxial/FatigueMaterial.o \
 	$(FE)/material/uniaxial/SAWSMaterial.o \
-	$(FE)/material/uniaxial/snap/Bilin.o \
-	$(FE)/material/uniaxial/snap/Bilin02.o \
+	$(FE)/material/uniaxial/Bilin.o \
+	$(FE)/material/uniaxial/Bilin02.o \
 	$(FE)/material/uniaxial/ConfinedConcrete01.o \
 	$(FE)/material/uniaxial/CableMaterial.o \
 	$(FE)/material/uniaxial/ENTMaterial.o \
@@ -767,6 +786,10 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/GNGMaterial.o \
 	$(FE)/material/uniaxial/SelfCenteringMaterial.o \
 	$(FE)/material/uniaxial/SPSW02.o \
+	$(FE)/material/uniaxial/TDConcrete.o \
+	$(FE)/material/uniaxial/TDConcreteEXP.o \
+	$(FE)/material/uniaxial/TDConcreteMC10.o \
+	$(FE)/material/uniaxial/TDConcreteMC10NL.o \
 	$(FE)/material/uniaxial/MaterialState.o \
 	$(FE)/material/uniaxial/backbone/HystereticBackbone.o \
 	$(FE)/material/uniaxial/backbone/ArctangentBackbone.o \
@@ -900,7 +923,7 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/nD/ConcreteS.o \
 	$(FE)/material/nD/SimplifiedJ2.o \
 	$(FE)/material/nD/PlaneStressSimplifiedJ2.o \
-	$(FE)/material/nD/PlaneStressUserMaterial.o $(PLAINCONCRETE) \
+	$(FE)/material/nD/PlaneStressUserMaterial.o $(PLAINCONCRETE) $(FILIP)\
 	$(FE)/material/nD/PlateFromPlaneStressMaterial.o \
 	$(FE)/material/nD/PlateRebarMaterial.o \
 	$(FE)/material/nD/stressDensityModel/stressDensity.o \
@@ -1014,11 +1037,15 @@ SUPER_LU_OBJ = $(FE)/system_of_eqn/linearSOE/sparseGEN/SuperLU.o \
 	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSolver.o
 endif
 
-# ifeq ($(PROGRAMMING_MODE), PARALLEL_INTERPRETERS)
-# SUPER_LU_OBJ = $(FE)/system_of_eqn/linearSOE/sparseGEN/SuperLU.o \
-# 	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSuperLU.o \
-# 	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenColLinSOE.o 
-# endif
+ifeq ($(PROGRAMMING_MODE), PARALLEL_INTERPRETERS)
+SUPER_LU_OBJ = $(FE)/system_of_eqn/linearSOE/sparseGEN/SuperLU.o \
+	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSuperLU.o \
+	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenColLinSOE.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsParallelSOE.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsParallelSolver.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSOE.o \
+	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSolver.o
+endif
 
 CUDA_CLASSES = 
 
