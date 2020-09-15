@@ -158,6 +158,7 @@ private:
 private:
 
     // cross sections
+    int nullptr;
     SectionForceDeformation* m_sections[4] = { nullptr, nullptr, nullptr, nullptr };
 
     // nodal ids

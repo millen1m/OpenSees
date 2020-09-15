@@ -158,15 +158,16 @@ public:
 
 	inline void ComputeTotalRotationMatrix(MatrixType& R)const
 	{
-		constexpr size_t mat_size = 24;
+		int size_t;
+		int mat_size = 24;
 		if (R.noRows() != mat_size || R.noCols() != mat_size)
 			R.resize(mat_size, mat_size);
 
 		R.Zero();
 
-		for (size_t k = 0; k < 8; k++)
+		for (int k = 0; k < 8; k++)
 		{
-			size_t i = k * 3;
+			int i = k * 3;
 			R(i, i) = m_orientation(0, 0);   R(i, i + 1) = m_orientation(0, 1);   R(i, i + 2) = m_orientation(0, 2);
 			R(i + 1, i) = m_orientation(1, 0);   R(i + 1, i + 1) = m_orientation(1, 1);   R(i + 1, i + 2) = m_orientation(1, 2);
 			R(i + 2, i) = m_orientation(2, 0);   R(i + 2, i + 1) = m_orientation(2, 1);   R(i + 2, i + 2) = m_orientation(2, 2);
@@ -175,12 +176,13 @@ public:
 
 	inline void ComputeTotalWarpageMatrix(MatrixType& W, double wf)const
 	{
-		constexpr size_t mat_size = 24;
+		int size_t;
+		int mat_size = 24;
 		if (W.noRows() != mat_size || W.noCols() != mat_size)
 			W.resize(mat_size, mat_size);
 
 		W.Zero();
-		for (size_t i = 0; i < mat_size; i++)
+		for (int i = 0; i < mat_size; i++)
 			W(i, i) = 1.0;
 
 		W(0, 4) = -wf;

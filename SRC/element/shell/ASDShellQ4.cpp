@@ -93,17 +93,17 @@ namespace
     typedef ASDVector3<double> Vector3Type;
 
     // calculation options
-    constexpr int OPT_NONE = 0;
-    constexpr int OPT_UPDATE = (1 << 0);
-    constexpr int OPT_LHS = (1 << 1);
-    constexpr int OPT_RHS = (1 << 2);
-    constexpr int OPT_LHS_IS_INITIAL = (1 << 3);
+    const int OPT_NONE = 0;
+    const int OPT_UPDATE = (1 << 0);
+    const int OPT_LHS = (1 << 1);
+    const int OPT_RHS = (1 << 2);
+    const int OPT_LHS_IS_INITIAL = (1 << 3);
 
     // gauss quadrature data
-    constexpr double GLOC = 0.577350269189626;
-    constexpr std::array<double, 4> XI = { -GLOC, GLOC, GLOC, -GLOC };
-    constexpr std::array<double, 4> ETA = { -GLOC, -GLOC, GLOC, GLOC };
-    constexpr std::array<double, 4> WTS = { 1.0, 1.0, 1.0, 1.0 };
+    const double GLOC = 0.577350269189626;
+    const std::array<double, 4> XI = { -GLOC, GLOC, GLOC, -GLOC };
+    const std::array<double, 4> ETA = { -GLOC, -GLOC, GLOC, GLOC };
+    const std::array<double, 4> WTS = { 1.0, 1.0, 1.0, 1.0 };
 
     // shape functions
     inline void shapeFunctions(double xi, double eta, Vector& N)
