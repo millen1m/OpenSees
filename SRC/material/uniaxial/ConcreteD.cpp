@@ -225,7 +225,7 @@ if(TStrain>TEpp)					//Tension
 			}
 
 }
-//สÜัน
+//
 else
 	{
 		if(TLoadState==0)		   //On the envelope
