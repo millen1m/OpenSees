@@ -22,13 +22,13 @@
     <ProjectGuid>{8062B50D-A609-33D0-8223-81D898DE05D5}</ProjectGuid>
     <SccProjectName />
     <SccLocalPath />
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.DLL|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -38,7 +38,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug.DLL|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -226,6 +226,7 @@
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\MINI.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\Particle.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\ParticleGroup.cpp" />
+    <ClCompile Include="..\..\..\SRC\element\PFEMElement\PFEMContact2D.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DFIC.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\PFEMElement2Dmini.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DQuasi.cpp" />
@@ -434,6 +435,7 @@
     <ClCompile Include="..\..\..\SRC\element\triangle\Tri31.cpp" />
     <ClCompile Include="..\..\..\SRC\element\shell\R3vectors.cpp" />
     <ClCompile Include="..\..\..\SRC\element\shell\ShellMITC4.cpp" />
+    <ClCompile Include="..\..\..\SRC\element\shell\ASDShellQ4.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\PFEMElement2D.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DBubble.cpp" />
     <ClCompile Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DCompressible.cpp" />
@@ -487,6 +489,7 @@
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\MINI.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\Particle.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\ParticleGroup.h" />
+    <ClInclude Include="..\..\..\SRC\element\PFEMElement\PFEMContact2D.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DFIC.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\PFEMElement2Dmini.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DQuasi.h" />
@@ -668,6 +671,7 @@
     <ClInclude Include="..\..\..\SRC\element\triangle\Tri31.h" />
     <ClInclude Include="..\..\..\SRC\element\shell\R3vectors.h" />
     <ClInclude Include="..\..\..\SRC\element\shell\ShellMITC4.h" />
+    <ClInclude Include="..\..\..\SRC\element\shell\ASDShellQ4.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\PFEMElement2D.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DBubble.h" />
     <ClInclude Include="..\..\..\SRC\element\PFEMElement\PFEMElement2DCompressible.h" />

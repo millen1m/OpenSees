@@ -22,13 +22,13 @@
     <ProjectGuid>{5BB0E918-CE81-7129-15F5-2A3470E92427}</ProjectGuid>
     <SccProjectName />
     <SccLocalPath />
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug.DLL|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -38,7 +38,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.DLL|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -192,6 +192,7 @@
     <ClCompile Include="..\..\..\SRC\recorder\DatastoreRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\DriftRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\ElementRecorder.cpp" />
+    <ClCompile Include="..\..\..\SRC\recorder\ElementRecorderRMS.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\EnvelopeDriftRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\EnvelopeElementRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\EnvelopeNodeRecorder.cpp" />
@@ -201,6 +202,7 @@
     <ClCompile Include="..\..\..\SRC\recorder\MaxNodeDispRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\MPCORecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\NodeRecorder.cpp" />
+    <ClCompile Include="..\..\..\SRC\recorder\NodeRecorderRMS.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\NormElementRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\NormEnvelopeElementRecorder.cpp" />
     <ClCompile Include="..\..\..\SRC\recorder\PatternRecorder.cpp" />
@@ -217,9 +219,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\SRC\recorder\DamageRecorder.h" />
+    <ClInclude Include="..\..\..\SRC\recorder\ElementRecorderRMS.h" />
     <ClInclude Include="..\..\..\SRC\recorder\EnvelopeDriftRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\GmshRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\MPCORecorder.h" />
+    <ClInclude Include="..\..\..\SRC\recorder\NodeRecorderRMS.h" />
     <ClInclude Include="..\..\..\SRC\recorder\NormElementRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\NormEnvelopeElementRecorder.h" />
     <ClInclude Include="..\..\..\SRC\recorder\PVDRecorder.h" />
