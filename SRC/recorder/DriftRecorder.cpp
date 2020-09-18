@@ -135,7 +135,9 @@ DriftRecorder::record(int commitTag, double timeStamp)
   if (numNodes == 0 || data == 0)
     return 0;
 
-  if (deltaT == 0.0 || timeStamp >= nextTimeStampToRecord - deltaT * 0.00001) {
+  // where 1.0e-5 is the maximum reliable ratio between analysis time step and deltaT
+  // and provides adequate tolerance for floating point precision
+    if (deltaT == 0.0 || timeStamp - nextTimeStampToRecord >= -deltaT * 1.0e-5) {
 
     if (deltaT != 0.0)
       nextTimeStampToRecord = nextTimeStampToRecord + deltaT;
