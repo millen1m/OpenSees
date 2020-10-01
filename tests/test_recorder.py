@@ -58,7 +58,7 @@ def test_recorder_time_step_is_stable():
     opy.analyze(50, 0.5)
     opy.setTime(0.0)
     opy.wipeAnalysis()
-    opy.recorder('Node', '-file', 'time_0_01.txt', '-precision', 16, '-dT', 0.01, '-relDtPrec', 0.00001, '-time', '-node', 1, '-dof', 1, 'accel')
+    opy.recorder('Node', '-file', 'time_0_01.txt', '-precision', 16, '-dT', 0.01, '-relDtTol', 0.00001, '-time', '-node', 1, '-dof', 1, 'accel')
     opy.timeSeries('Path', 1, '-dt', 0.01, '-values', -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -7.51325e-05)
     opy.pattern('Plain', 1, 1)
     opy.load(13, 1.0, 0.0)
