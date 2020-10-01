@@ -81,7 +81,7 @@ OPS_NodeRecorder()
     
     bool echoTimeFlag = false;
     double dT = 0.0;
-    double relDtTol = 0.00001;
+    double rTolDt = 0.00001;
     bool doScientific = false;
     
     int precision = 6;
@@ -168,11 +168,11 @@ OPS_NodeRecorder()
                 }
             }
         }
-        else if (strcmp(option, "-relDtTol") == 0) {
+        else if (strcmp(option, "-rTolDt") == 0) {
             if (OPS_GetNumRemainingInputArgs() > 0) {
                 int num = 1;
-                if (OPS_GetDoubleInput(&num, &relDtTol) < 0) {
-                    opserr << "WARNING: failed to read relDtTol\n";
+                if (OPS_GetDoubleInput(&num, &rTolDt) < 0) {
+                    opserr << "WARNING: failed to read rTolDt\n";
                     return 0;
                 }
             }
@@ -301,7 +301,7 @@ OPS_NodeRecorder()
         return 0;
     NodeRecorder* recorder = new NodeRecorder(dofs, &nodes, gradIndex,
         responseID, *domain, *theOutputStream,
-        dT, relDtTol, echoTimeFlag, theTimeSeries);
+        dT, rTolDt, echoTimeFlag, theTimeSeries);
     
     return recorder;
 }
@@ -327,7 +327,7 @@ NodeRecorder::NodeRecorder(const ID &dofs,
 			   Domain &theDom,
 			   OPS_Stream &theOutput,
 			   double dT,
-			   double relDtTol,
+			   double rTolDt,
 			   bool timeFlag,
 			   TimeSeries **theSeries
 			   )
@@ -335,7 +335,7 @@ NodeRecorder::NodeRecorder(const ID &dofs,
  theDofs(0), theNodalTags(0), theNodes(0), response(0), 
  theDomain(&theDom), theOutputHandler(&theOutput),
  echoTimeFlag(timeFlag), dataFlag(0), 
- deltaT(dT), relDeltaTTol(relDtTol), nextTimeStampToRecord(0.0),
+ deltaT(dT), relDeltaTTol(rTolDt), nextTimeStampToRecord(0.0),
  gradIndex(pgradIndex), 
  initializationDone(false), numValidNodes(0), addColumnInfo(0), 
  theTimeSeries(theSeries), timeSeriesValues(0)
@@ -922,9 +922,10 @@ NodeRecorder::sendSelf(int commitTag, Channel &theChannel)
       return -1;
     }
 
-  static Vector data(2);
+  static Vector data(3);
   data(0) = deltaT;
   data(1) = nextTimeStampToRecord;
+  data(2) = relDeltaTTol;
   if (theChannel.sendVector(0, commitTag, data) < 0) {
     opserr << "NodeRecorder::sendSelf() - failed to send data\n";
     return -1;
@@ -1047,6 +1048,7 @@ NodeRecorder::recvSelf(int commitTag, Channel &theChannel,
   }
   deltaT = data(0);
   nextTimeStampToRecord = data(1);
+  relDeltaTTol = data(2);
 
 
   if (theOutputHandler != 0)
