@@ -81,6 +81,7 @@ OPS_NodeRecorder()
     
     bool echoTimeFlag = false;
     double dT = 0.0;
+    double relDblPrec = 0.00001;
     bool doScientific = false;
     
     int precision = 6;
@@ -195,6 +196,15 @@ OPS_NodeRecorder()
                 }
             }
         }
+//        else if (strcmp(option, "-relDblPrec") == 0) {
+//            if (OPS_GetNumRemainingInputArgs() > 0) {
+//                int num = 1;
+//                if (OPS_GetIntInput(&num, &relDblPrec) < 0) {
+//                    opserr << "WARNING: failed to read precision\n";
+//                    return 0;
+//                }
+//            }
+//        }
         else if (strcmp(option, "-node") == 0) {
             int numNodes = 0;
             while (OPS_GetNumRemainingInputArgs() > 0) {
@@ -291,7 +301,7 @@ OPS_NodeRecorder()
         return 0;
     NodeRecorder* recorder = new NodeRecorder(dofs, &nodes, gradIndex,
         responseID, *domain, *theOutputStream,
-        dT, echoTimeFlag, theTimeSeries);
+        dT, echoTimeFlag, theTimeSeries, relDblPrec);
     
     return recorder;
 }
@@ -318,7 +328,8 @@ NodeRecorder::NodeRecorder(const ID &dofs,
 			   OPS_Stream &theOutput,
 			   double dT,
 			   bool timeFlag,
-			   TimeSeries **theSeries)
+			   TimeSeries **theSeries,
+			   double relDblPrec)
 :Recorder(RECORDER_TAGS_NodeRecorder),
  theDofs(0), theNodalTags(0), theNodes(0), response(0), 
  theDomain(&theDom), theOutputHandler(&theOutput),
@@ -522,7 +533,7 @@ NodeRecorder::record(int commitTag, double timeStamp)
   
   // where 1.0e-5 is the maximum reliable ratio between analysis time step and deltaT
   // and provides adequate tolerance for floating point precision
-    if (deltaT == 0.0 || timeStamp - nextTimeStampToRecord >= -deltaT * 1.0e-5) {
+    if (deltaT == 0.0 || timeStamp - nextTimeStampToRecord >= -deltaT * relDblPrec) {
 
     if (deltaT != 0.0)
       nextTimeStampToRecord = nextTimeStampToRecord + deltaT;

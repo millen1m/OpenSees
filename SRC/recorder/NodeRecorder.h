@@ -57,7 +57,8 @@ class NodeRecorder: public Recorder
 		 OPS_Stream &theOutputHandler,
 		 double deltaT = 0.0,
 		 bool echoTimeFlag = true,
-		 TimeSeries **timeSeries = 0); 
+		 TimeSeries **timeSeries = 0,
+		 double relDblPrec = 0.00001);
     
     ~NodeRecorder();
 
@@ -100,6 +101,7 @@ class NodeRecorder: public Recorder
 
     TimeSeries **theTimeSeries;
     double *timeSeriesValues;
+    double relDblPrec;
 };
 
 #endif
