@@ -81,7 +81,7 @@ OPS_NodeRecorder()
     
     bool echoTimeFlag = false;
     double dT = 0.0;
-    double relDblPrec = 0.00001;
+    double relDtPrec = 0.00001;
     bool doScientific = false;
     
     int precision = 6;
@@ -168,6 +168,15 @@ OPS_NodeRecorder()
                 }
             }
         }
+        else if (strcmp(option, "-relDtPrec") == 0) {
+            if (OPS_GetNumRemainingInputArgs() > 0) {
+                int num = 1;
+                if (OPS_GetDoubleInput(&num, &relDtPrec) < 0) {
+                    opserr << "WARNING: failed to read relDtPrec\n";
+                    return 0;
+                }
+            }
+        }
         else if (strcmp(option, "-timeSeries") == 0) {
             int numTimeSeries = 0;
             while (OPS_GetNumRemainingInputArgs() > 0) {
@@ -196,15 +205,6 @@ OPS_NodeRecorder()
                 }
             }
         }
-//        else if (strcmp(option, "-relDblPrec") == 0) {
-//            if (OPS_GetNumRemainingInputArgs() > 0) {
-//                int num = 1;
-//                if (OPS_GetIntInput(&num, &relDblPrec) < 0) {
-//                    opserr << "WARNING: failed to read precision\n";
-//                    return 0;
-//                }
-//            }
-//        }
         else if (strcmp(option, "-node") == 0) {
             int numNodes = 0;
             while (OPS_GetNumRemainingInputArgs() > 0) {
@@ -301,7 +301,7 @@ OPS_NodeRecorder()
         return 0;
     NodeRecorder* recorder = new NodeRecorder(dofs, &nodes, gradIndex,
         responseID, *domain, *theOutputStream,
-        dT, echoTimeFlag, theTimeSeries, relDblPrec);
+        dT, relDtPrec, echoTimeFlag, theTimeSeries);
     
     return recorder;
 }
@@ -312,7 +312,7 @@ NodeRecorder::NodeRecorder()
  theDofs(0), theNodalTags(0), theNodes(0), response(0), 
  theDomain(0), theOutputHandler(0),
  echoTimeFlag(true), dataFlag(0), 
- deltaT(0), nextTimeStampToRecord(0.0), 
+ deltaT(0), relDeltaTPrec(0), nextTimeStampToRecord(0.0),
  gradIndex(-1),
  initializationDone(false), numValidNodes(0), addColumnInfo(0), theTimeSeries(0), timeSeriesValues(0)
 {
@@ -327,14 +327,15 @@ NodeRecorder::NodeRecorder(const ID &dofs,
 			   Domain &theDom,
 			   OPS_Stream &theOutput,
 			   double dT,
+			   double relDtPrec,
 			   bool timeFlag,
-			   TimeSeries **theSeries,
-			   double relDblPrec)
+			   TimeSeries **theSeries
+			   )
 :Recorder(RECORDER_TAGS_NodeRecorder),
  theDofs(0), theNodalTags(0), theNodes(0), response(0), 
  theDomain(&theDom), theOutputHandler(&theOutput),
  echoTimeFlag(timeFlag), dataFlag(0), 
- deltaT(dT), nextTimeStampToRecord(0.0), 
+ deltaT(dT), relDeltaTPrec(relDtPrec), nextTimeStampToRecord(0.0),
  gradIndex(pgradIndex), 
  initializationDone(false), numValidNodes(0), addColumnInfo(0), 
  theTimeSeries(theSeries), timeSeriesValues(0)
@@ -533,7 +534,8 @@ NodeRecorder::record(int commitTag, double timeStamp)
   
   // where 1.0e-5 is the maximum reliable ratio between analysis time step and deltaT
   // and provides adequate tolerance for floating point precision
-    if (deltaT == 0.0 || timeStamp - nextTimeStampToRecord >= -deltaT * relDblPrec) {
+  opserr << "relDtPrec"<<relDeltaTPrec<<" Here\n";
+    if (deltaT == 0.0 || timeStamp - nextTimeStampToRecord >= -deltaT * relDeltaTPrec) {
 
     if (deltaT != 0.0)
       nextTimeStampToRecord = nextTimeStampToRecord + deltaT;

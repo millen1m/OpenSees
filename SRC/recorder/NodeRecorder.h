@@ -56,9 +56,10 @@ class NodeRecorder: public Recorder
 		 Domain &theDomain,
 		 OPS_Stream &theOutputHandler,
 		 double deltaT = 0.0,
+		 double relDeltaTPrec = 0.00001,
 		 bool echoTimeFlag = true,
-		 TimeSeries **timeSeries = 0,
-		 double relDblPrec = 0.00001);
+		 TimeSeries **timeSeries = 0
+		 );
     
     ~NodeRecorder();
 
@@ -88,6 +89,7 @@ class NodeRecorder: public Recorder
     int dataFlag;        // flag indicating what it is to be stored in recorder
 
     double deltaT;
+    double relDeltaTPrec;
     double nextTimeStampToRecord;
 
     // AddingSensitivity:BEGIN //////////////////////////////
@@ -101,7 +103,6 @@ class NodeRecorder: public Recorder
 
     TimeSeries **theTimeSeries;
     double *timeSeriesValues;
-    double relDblPrec;
 };
 
 #endif
