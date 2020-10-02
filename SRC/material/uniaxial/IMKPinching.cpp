@@ -342,12 +342,12 @@ int IMKPinching::setTrialStrain(double strain, double strainRate)
 //			else if (abs(Krel_LastPeak) <= abs(Krel_GlobalPeak)) {
 //				TargetPeak_Flag = 0;
 //			}
-			else if ((du >= 0) && (abs((ULastPeak_pos_j_1 - Upeak_pos_j_1) / Upeak_pos_j_1) < 0.05) && (abs(Krel_LastPeak) <= 1.05*abs(Krel_GlobalPeak))) {
-				TargetPeak_Flag = 0;
-			}
-			else if ((du <= 0) && (abs((ULastPeak_neg_j_1 - Upeak_neg_j_1) / Upeak_neg_j_1) < 0.05) && (abs(Krel_LastPeak) <= 1.05*abs(Krel_GlobalPeak))) {
-				TargetPeak_Flag = 0;
-			}
+//			else if ((du >= 0) && (abs((ULastPeak_pos_j_1 - Upeak_pos_j_1) / Upeak_pos_j_1) < 0.05) && (abs(Krel_LastPeak) <= 1.05*abs(Krel_GlobalPeak))) {
+//				TargetPeak_Flag = 0;
+//			}
+//			else if ((du <= 0) && (abs((ULastPeak_neg_j_1 - Upeak_neg_j_1) / Upeak_neg_j_1) < 0.05) && (abs(Krel_LastPeak) <= 1.05*abs(Krel_GlobalPeak))) {
+//				TargetPeak_Flag = 0;
+//			}
 			else {
 				TargetPeak_Flag = 1;
 			}
