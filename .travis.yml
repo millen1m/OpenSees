@@ -9,9 +9,9 @@ before_install:
   - cp MAKES/Makefile.def.TRAVIS-CI Makefile.def
 
 script: 
-  - make --silent
+  - make python --silent
   - cd ./SRC/interpreter
-  - make --silent
+#  - make --silent
   - python3 -c 'import opensees'
 
 addons:
