@@ -342,7 +342,7 @@ int IMKPeakOriented::setTrialStrain(double strain, double strainRate)
 				TargetPeak_Flag=0;            
 //			} else if (abs(Krel_LastPeak) <= abs(Krel_GlobalPeak)) {
 //				TargetPeak_Flag = 0;
-//			}
+			}
 			else {
 				TargetPeak_Flag = 1;
 			}
