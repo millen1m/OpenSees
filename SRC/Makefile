@@ -697,7 +697,6 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/HookGap.o \
 	$(FE)/material/uniaxial/UVCuniaxial.o \
 	$(FE)/material/uniaxial/IMKBilin.o \
-	$(FE)/material/uniaxial/IMKPinching.o \
 	$(FE)/material/uniaxial/IMKPeakOriented.o \
 	$(FE)/material/uniaxial/HardeningMaterial.o \
 	$(FE)/material/uniaxial/HardeningMaterial2.o \
@@ -741,8 +740,6 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/StainlessECThermal.o \
 	$(FE)/material/uniaxial/SteelECThermal.o \
 	$(FE)/material/uniaxial/limitState/PinchingLimitStateMaterial.o \
-	$(FE)/material/uniaxial/ModIMKPinching.o \
-	$(FE)/material/uniaxial/ModIMKPinching02.o \
 	$(FE)/material/uniaxial/ModIMKPeakOriented.o \
 	$(FE)/material/uniaxial/ModIMKPeakOriented02.o \
 	$(FE)/material/uniaxial/SmoothPSConcrete.o \

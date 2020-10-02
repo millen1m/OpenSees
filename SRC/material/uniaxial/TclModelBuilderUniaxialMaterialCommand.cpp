@@ -141,11 +141,8 @@ extern void *OPS_ElasticMaterialThermal(void); //L.Jiang[SIF]
 extern void *OPS_BWBN(void);
 extern void *OPS_IMKPeakOriented(void);
 extern void *OPS_IMKBilin(void);
-extern void *OPS_IMKPinching(void);
 extern void *OPS_ModIMKPeakOriented(void);
 extern void *OPS_ModIMKPeakOriented02(void);
-extern void *OPS_ModIMKPinching(void);
-extern void *OPS_ModIMKPinching02(void);
 extern void *OPS_ConcretewBeta(void);
 extern void *OPS_ConcreteD(void);
 extern void *OPS_PinchingLimitState(void);
@@ -598,19 +595,8 @@ TclModelBuilderUniaxialMaterialCommand (ClientData clientData, Tcl_Interp *inter
       else 
 	return TCL_ERROR;
 
-    } else if (strcmp(argv[1],"ModIMKPinching") == 0) {
-      void *theMat = OPS_ModIMKPinching();
-      if (theMat != 0) 
-	theMaterial = (UniaxialMaterial *)theMat;
-      else 
-	return TCL_ERROR;
 
-    } else if (strcmp(argv[1],"ModIMKPinching02") == 0) {
-      void *theMat = OPS_ModIMKPinching02();
-      if (theMat != 0) 
-	theMaterial = (UniaxialMaterial *)theMat;
-      else 
-	return TCL_ERROR;
+
 
     } else if (strcmp(argv[1], "BoucWenOriginal") == 0) {
         void *theMat = OPS_BoucWenOriginal();
@@ -650,14 +636,7 @@ TclModelBuilderUniaxialMaterialCommand (ClientData clientData, Tcl_Interp *inter
         return TCL_ERROR;
 
     }
-    else if (strcmp(argv[1], "IMKPinching") == 0) {
-      void *theMat = OPS_IMKPinching();
-      if (theMat != 0)
-        theMaterial = (UniaxialMaterial *)theMat;
-      else
-        return TCL_ERROR;
 
-    }
     else if (strcmp(argv[1], "ModIMKPeakOriented") == 0) {
       void *theMat = OPS_ModIMKPeakOriented();
       if (theMat != 0) 
