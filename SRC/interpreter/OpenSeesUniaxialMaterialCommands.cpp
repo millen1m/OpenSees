@@ -100,8 +100,8 @@ void* OPS_Bilin();
 void* OPS_Bilin02();
 void* OPS_ModIMKPeakOriented();
 void* OPS_ModIMKPeakOriented02();
-void* OPS_ModIMKPinching();
-void* OPS_ModIMKPinching02();
+//void* OPS_ModIMKPinching();
+//void* OPS_ModIMKPinching02();
 void* OPS_SAWSMaterial();
 void* OPS_BarSlipMaterial();
 void* OPS_Bond_SP01();
@@ -169,7 +169,7 @@ void* OPS_UniaxialJ2Plasticity();
 void* OPS_OOHystereticMaterial();
 void* OPS_UVCuniaxial();
 void* OPS_IMKBilin();
-void* OPS_IMKPinching();
+//void* OPS_IMKPinching();
 void* OPS_IMKPeakOriented();
 void* OPS_SLModel();
 
@@ -251,8 +251,8 @@ namespace {
 	uniaxialMaterialsMap.insert(std::make_pair("Bilin02", &OPS_Bilin02));
 	uniaxialMaterialsMap.insert(std::make_pair("ModIMKPeakOriented", &OPS_ModIMKPeakOriented));
 	uniaxialMaterialsMap.insert(std::make_pair("ModIMKPeakOriented02", &OPS_ModIMKPeakOriented02));
-	uniaxialMaterialsMap.insert(std::make_pair("ModIMKPinching", &OPS_ModIMKPinching));
-	uniaxialMaterialsMap.insert(std::make_pair("ModIMKPinching02", &OPS_ModIMKPinching02));
+//	uniaxialMaterialsMap.insert(std::make_pair("ModIMKPinching", &OPS_ModIMKPinching));
+//	uniaxialMaterialsMap.insert(std::make_pair("ModIMKPinching02", &OPS_ModIMKPinching02));
 	uniaxialMaterialsMap.insert(std::make_pair("SAWS", &OPS_SAWSMaterial));
 	uniaxialMaterialsMap.insert(std::make_pair("SAWSMaterial", &OPS_SAWSMaterial));
 	uniaxialMaterialsMap.insert(std::make_pair("BarSlip", &OPS_BarSlipMaterial));
@@ -333,7 +333,7 @@ namespace {
 	uniaxialMaterialsMap.insert(std::make_pair("OOHysteretic", &OPS_OOHystereticMaterial));
 	uniaxialMaterialsMap.insert(std::make_pair("UVCuniaxial", &OPS_UVCuniaxial));
 	uniaxialMaterialsMap.insert(std::make_pair("IMKBilin", &OPS_IMKBilin));
-	uniaxialMaterialsMap.insert(std::make_pair("IMKPinching", &OPS_IMKPinching));
+//	uniaxialMaterialsMap.insert(std::make_pair("IMKPinching", &OPS_IMKPinching));
 	uniaxialMaterialsMap.insert(std::make_pair("IMKPeakOriented", &OPS_IMKPeakOriented));
 	uniaxialMaterialsMap.insert(std::make_pair("SLModel", &OPS_SLModel));
 
