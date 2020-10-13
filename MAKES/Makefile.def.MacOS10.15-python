@@ -395,7 +395,7 @@ MACHINE_NUMERICAL_LIBS  =  \
 		$(FORTO) \
 		$(CUDA_LIB) \
 		$(RELIABILITY_LIBRARY) \
-		-ldl -L/usr/local/Cellar/gcc/9.2.0_3/lib/gcc/9/ -lgfortran
+		-ldl -L/usr/local/opt/gcc/lib/gcc/10/ -lgfortran
 
 # Use BLAS,CBLAS, and LAPACK from APPLE Accelerate Library
 MACHINE_SPECIFIC_LIBS = $(AGL_OBJS) -L/usr/local/opt/openssl/lib -lssl -lcrypto \

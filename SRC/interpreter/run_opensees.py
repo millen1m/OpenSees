@@ -1,0 +1,2 @@
+import opensees
+opensees.wipe()
