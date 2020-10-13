@@ -203,7 +203,7 @@ WIPE_LIBS = $(FE_LIBRARY) \
 
 # Compilers
 ifeq ($(PROGRAMMING_MODE), SEQUENTIAL)
-CC++	= /usr/bin/clang++
+CC++	= /usr/bin/clang++ -std=c++14
 CC      = /usr/bin/clang
 FC	    = /usr/local/bin/gfortran
 
@@ -395,7 +395,7 @@ MACHINE_NUMERICAL_LIBS  =  \
 		$(FORTO) \
 		$(CUDA_LIB) \
 		$(RELIABILITY_LIBRARY) \
-		-ldl -L/usr/local/Cellar/gcc/9.2.0_1/lib/gcc/9/ -lgfortran
+		-ldl -L/usr/local/Cellar/gcc/9.2.0_3/lib/gcc/9/ -lgfortran
 
 # Use BLAS,CBLAS, and LAPACK from APPLE Accelerate Library
 MACHINE_SPECIFIC_LIBS = $(AGL_OBJS) -L/usr/local/opt/openssl/lib -lssl -lcrypto \
