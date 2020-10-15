@@ -156,6 +156,7 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        int numEle = 0;
        int endEleIDs = 2;
        double dT = 0.0;
+       double rTolDt = 0.00001;
        bool echoTime = false;
        int loc = endEleIDs;
        int flags = 0;
@@ -311,7 +312,13 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   if (Tcl_GetDouble(interp, argv[loc], &dT) != TCL_OK)	
 	     return TCL_ERROR;	
 	   loc++;
-	 } 
+	 }
+	 else if (strcmp(argv[loc],"-rTolDt") == 0) {
+            loc++;
+            if (Tcl_GetDouble(interp, argv[loc], &rTolDt) != TCL_OK)
+	     return TCL_ERROR;
+	   loc++;
+     }
 
 
 	 else if (strcmp(argv[loc],"-precision") == 0) {
@@ -463,6 +470,7 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 					      theDomain, 
 					      *theOutputStream,
 					      dT,
+					      rTolDt,
 					      specificIndices);
 
        } else if (strcmp(argv[1],"EnvelopeElement") == 0) {
@@ -1065,6 +1073,7 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        bool echoTimeFlag = false;
        int flags = 0;
        double dT = 0.0;
+       double rTolDt = 0.00001;
        int numNodes = 0;
        bool doScientific = false;
 
@@ -1184,6 +1193,12 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	   pos ++;
 	   if (Tcl_GetDouble(interp, argv[pos], &dT) != TCL_OK)	
 	     return TCL_ERROR;		  
+	   pos++;
+	 }
+	 else if (strcmp(argv[pos],"-rTolDt") == 0) {
+	   pos ++;
+	   if (Tcl_GetDouble(interp, argv[pos], &rTolDt) != TCL_OK)
+	     return TCL_ERROR;
 	   pos++;
 	 }
 
@@ -1387,7 +1402,8 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 					   responseID, 
 					   theDomain, 
 					   *theOutputStream, 
-					   dT, 
+					   dT,
+					   rTolDt,
 					   echoTimeFlag,
 					   theTimeSeries);
 
@@ -1442,6 +1458,7 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
        int perpDirn = 2;
        int pos = 2;
        double dT = 0.0;
+       double rTolDt = 0.00001;
        int precision = 6;
        bool doScientific = false;
        bool closeOnWrite = false;
@@ -1579,10 +1596,15 @@ enum outputMode  {STANDARD_STREAM, DATA_STREAM, XML_STREAM, DATABASE_STREAM, BIN
 	     return TCL_ERROR;	
 	   pos++;
 
-	 } else 
+	 }
+    else if (strcmp(argv[pos],"-rTolDt") == 0) {
+            pos++;
+	   if (Tcl_GetDouble(interp, argv[pos], &rTolDt) != TCL_OK)
+	     return TCL_ERROR;
+	   pos++;
+        } else
 	   pos++;
        }
-
        if (iNodes.Size() != jNodes.Size()) {
 	 opserr << "WARNING recorder Drift - the number of iNodes and jNodes must be the same " << iNodes << " " << jNodes << endln;
 	 return TCL_ERROR;

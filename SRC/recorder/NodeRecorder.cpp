@@ -538,7 +538,7 @@ NodeRecorder::record(int commitTag, double timeStamp)
     if (deltaT == 0.0 || timeStamp - nextTimeStampToRecord >= -deltaT * relDeltaTTol) {
 
     if (deltaT != 0.0)
-      nextTimeStampToRecord = nextTimeStampToRecord + deltaT;
+      nextTimeStampToRecord = timeStamp + deltaT;
 
     //
     // if need nodal reactions get the domain to calculate them
