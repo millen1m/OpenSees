@@ -399,7 +399,8 @@ ModelBuilder *theBuilder =0;
 
 #include <DistributedDisplacementControl.h>
 #include <ShadowSubdomain.h>
-#include <Metis.h>
+// This should be Metis.h found in the METISdir/includes in brew dir
+#include <metis.h>
 #include <ShedHeaviest.h>
 #include <DomainPartitioner.h>
 #include <GraphPartitioner.h>
