@@ -58,6 +58,7 @@
 
 #ifdef _PARALLEL_INTERPRETERS
 #include <mpi.h>
+#include <Metis.h>
 #include <metis1.h>
 #endif
 

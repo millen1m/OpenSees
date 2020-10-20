@@ -41,7 +41,7 @@
 #define Metis_h
 
 #ifdef _USE_METIS_5p1
-#include <metis.h>
+#include "metis1.h"
 #endif
 
 #include <GraphPartitioner.h>
