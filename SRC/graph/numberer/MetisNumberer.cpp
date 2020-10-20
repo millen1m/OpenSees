@@ -40,7 +40,7 @@
 // What: "@(#) Metis.C, revA"
 
 // This should be Metis.h found in the METISdir/includes in brew dir
-#include <metis.h>
+#include <Metis.h>
 #include <Graph.h>
 #include <Vertex.h>
 

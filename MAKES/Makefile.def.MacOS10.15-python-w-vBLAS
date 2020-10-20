@@ -45,9 +45,7 @@ INTERPRETER_LANGUAGE = PYTHON
 
 PROGRAMMING_MODE = SEQUENTIAL
 #PROGRAMMING_MODE = PARALLEL
-PROGRAMMING_MODE = PARALLEL_INTERPRETERS
-
-# is pymetis installed for unix python parallel version?
+#PROGRAMMING_MODE = PARALLEL_INTERPRETERS
 
 OpenSees_PROGRAM = $(HOME)/bin/OpenSees
 
@@ -95,13 +93,11 @@ SUPERLU_DISTdir = $(HOME)/OTHER/SuperLU_DIST_4.3/SRC
 ARPACKdir       = $(HOME)/OTHER/ARPACK
 UMFPACKdir      = $(HOME)/OTHER/UMFPACK
 METISdir        = $(HOME)/OTHER/METIS
-#METISdir = /usr/local/Cellar/brewsci-metis/5.1.0
 AMDdir	        = $(HOME)/OTHER/AMD
 CSPARSEdir      = $(HOME)/OTHER/CSPARSE
 ITPACKdir       = $(HOME)/OTHER/ITPACK
 SRCdir          = $(HOME)/SRC
 PYdir          = $(HOME)/SRC/interpreter
-MUMPSdir = /usr/local/Cellar/brewsci-mumps/5.2.1
 # TODO: remove PYdir
 
 DIRS = $(BLASdir) \
@@ -159,7 +155,6 @@ SUPERLU_LIBRARY = $(HOME)/lib/libSuperLU.a
 ARPACK_LIBRARY  = $(HOME)/lib/libArpack.a
 UMFPACK_LIBRARY = $(HOME)/lib/libUmfpack.a
 METIS_LIBRARY   = $(HOME)/lib/libMetis.a
-#METIS_LIBRARY   = /usr/local/Cellar/brewsci-metis/5.1.0/lib/libmetis.dylib
 AMD_LIBRARY	    = $(HOME)/lib/libAMD.a
 ITPACK_LIBRARY  = $(HOME)/lib/libItpack.a
 CSPARSE_LIBRARY = $(HOME)/lib/libcsparse.a
@@ -207,15 +202,15 @@ WIPE_LIBS = $(FE_LIBRARY) \
 
 # Compilers
 ifeq ($(PROGRAMMING_MODE), SEQUENTIAL)
-CC++	= /usr/bin/clang++ -std=c++17
-CC      = /usr/bin/clang
+CC++	= /usr/bin/clang++ -std=c++14
+CC      = /usr/bin/clang  -std=c18 -Wimplicit-function-declaration
 FC	    = /usr/local/bin/gfortran
 
 LINKER    = $(CC++)
 LINKFLAGS = -Wl
 
 else
-CC++  = /usr/local/bin/mpic++ -std=c++17
+CC++  = /usr/local/bin/mpic++
 CC    = /usr/local/bin/mpicc
 FC	  = /usr/local/bin/mpifort
 
@@ -319,7 +314,6 @@ SHELL       = /bin/sh
 # | be linked with when creating executables. These are     |
 # | platform specific and typically order does matter!!     |
 # %---------------------------------------------------------%
-METIS_INCLUDE = -I$(METIS_DIR)/include
 
 # Use scalapack from Homebrew
 SCALAPACK = YES
@@ -328,14 +322,12 @@ SCALAPACK_FLAG = -D_SCALAP
 #SCALAPACK_DIR = /usr/local/Cellar/scalapack/2.0.2_6/
 #SCALAPACK_LIB = -L$(SCALAPACK_DIR)/lib \
 #				-lscalapack -lreflapack -lrefblas
-#SCALAPACK_DIR = /usr/local/Cellar/brewsci-scalapack/2.0.2_2
-#VECLIBFORT_DIR = /usr/local/opt/veclibfort
-#SCALAPACK_LIB = $(SCALAPACK_DIR)/lib/libscalapack.dylib $(VECLIBFORT_DIR)/lib/libvecLibFort.a
 SCALAPACK_DIR =
 SCALAPACK_LIB = -lscalapack -lveclibfort
+
 # Use Mumps from Homebrew
 MUMPS = YES
-MUMPS_DIR = /usr/local/Cellar/brewsci-mumps/5.2.1
+MUMPS_DIR =
 MUMPS_FLAG = -D_MUMPS -D_OPENMPI
 MUMPS_INCLUDE = -I$(MUMPS_DIR)/include
 MUMPS_LIB = $(FE)/system_of_eqn/linearSOE/mumps/MumpsSOE.o \
@@ -343,7 +335,6 @@ MUMPS_LIB = $(FE)/system_of_eqn/linearSOE/mumps/MumpsSOE.o \
              $(FE)/system_of_eqn/linearSOE/mumps/MumpsParallelSOE.o \
              $(FE)/system_of_eqn/linearSOE/mumps/MumpsParallelSolver.o \
              -ldmumps -lmumps_common -lpord
-             #$(MUMPS_DIR)/lib/libdmumps.dylib $(MUMPS_DIR)/lib/libmumps_common.dylib $(MUMPS_DIR)/lib/libpord.a
 
 ifeq ($(PROGRAMMING_MODE), SEQUENTIAL)
 SCALAPACK = NO
@@ -420,7 +411,7 @@ ifeq ($(PROGRAMMING_MODE), PARALLEL_INTERPRETERS)
 PARALLEL_LIB = 	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSuperLU.o \
 	$(FE)/system_of_eqn/linearSOE/sparseGEN/DistributedSparseGenColLinSOE.o \
 	$(DISTRIBUTED_SUPERLU_LIBRARY) $(MUMPS_LIB) $(SCALAPACK_LIB) $(METIS_LIBRARY) \
-	/usr/local/Cellar/open-mpi/4.0.5/lib/libmpi.dylib
+	-lmpi_cxx -lmpi_mpifh -lmpi -lopen-rte -lopen-pal
 else
 PARALLEL_LIB =
 endif

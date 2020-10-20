@@ -98,7 +98,7 @@
 
 #include <Graph.h>
 #include <RCM.h>
-#include <metis.h>
+#include <Metis.h>
 
 int main(int argc, char **argv)
 {
